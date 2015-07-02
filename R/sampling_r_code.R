@@ -40,7 +40,8 @@ PrepareDataset <- function(data, plot, num.of.individuals,
 }
 
 Sampling <- function(data, num.of.plots, expert, volunteer, 
-                     num.experts, frequency.year, frequency.month, frequency.day){
+                     num.experts, frequency.year, frequency.month, frequency.day,
+                     outputall){
   
   if (num.of.plots < num.experts) { 
     stop("num.of.plots need to be equal or more than num.experts")
@@ -48,7 +49,10 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
   
   data$expert.volunteer <- 0
   data$costs <- 0
-  choosenplots <- sort (sample (unique (data[, 1]), num.of.plots, replace = F))
+  
+  choosenplots <- ChoosePlots (data, num.of.plots)
+  expert.plots <- ExpertPlots (choosenplots, num.of.plots, num.experts)
+  volunteer.plots <- VolunteerPlots (choosenplots, expert.plots)
   
   year <- unique (data[, 6]) 
   year <- year[seq (1, length(year), frequency.year)]
@@ -68,12 +72,6 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
   } else {
     day <- 0
   } 
-    
-    if (num.of.plots == 1 & num.experts == 1) {
-      expert.plots <- choosenplots
-    } else {
-      expert.plots <- sample (choosenplots, num.experts)
-    }
       
     data$expert.volunteer[data[, 1] %in% expert.plots & data[, 6] 
                           %in% year & data[, 7] %in% month & data[, 8] %in% day] <- "expert" 
@@ -83,7 +81,7 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
                 & data[, 7] %in% month & data[, 8] %in% day] <- expert[5]
     
     if (num.of.plots != num.experts) {
-      volunteer.plots <- choosenplots[!(choosenplots %in% expert.plots)]
+#       volunteer.plots <- choosenplots[!(choosenplots %in% expert.plots)]
     
       data$expert.volunteer[data[, 1] %in% volunteer.plots & data[, 6] 
                 %in% year & data[, 7] %in% month & data[, 8] %in% day] <- "volunteer"
@@ -92,19 +90,50 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
                 & data[, 7] %in% month & data[, 8] %in% day] <- volunteer[5]
     }
   
-  data <- data[data$expert.volunteer != 0, ]
-  
-  if (num.experts > 0) {
+   if (num.experts > 0) {
     data <- SamplingEcologist (data, expert.plots, expert[1],
                               expert[2], expert[3], expert[4]) 
-  }
+   }
   
-  if (num.experts != num.of.plots) {
+   if (num.experts != num.of.plots) {
     data <- SamplingEcologist (data, volunteer.plots, volunteer[1],
                               volunteer[2], volunteer[3], volunteer[4])
+   }
+  
+  if (outputall) {
+      return (data)
+  } else {
+    data <- data[data$expert.volunteer != 0, ]
+    return (data)
+  }
+}
+
+#'ChoosePlots
+#'
+
+ChoosePlots <- function (data, num.of.plots) {
+  
+  choosenplots <- sort (sample (unique (data[, 1]), num.of.plots, replace = F))
+  
+  return (choosenplots)
+}
+
+ExpertPlots <- function (choosenplots, num.of.plots, num.experts) {
+  
+  if (num.of.plots == 1 & num.experts == 1) {
+    expert.plots <- choosenplots
+  } else {
+    expert.plots <- sample (choosenplots, num.experts)
   }
   
-  return (data)
+  return (expert.plots)
+}
+
+VolunteerPlots <- function (choosenplots, expert.plots) {
+  
+  volunteer.plots <- choosenplots[!(choosenplots %in% expert.plots)]
+  
+  return (volunteer.plots)
 }
 
 #'CreateEcologist

@@ -30,11 +30,10 @@ Papilio <- PrepareDataset(Papilio.machaon,1,5,6,2,3,4,0,0)
 volunteerdata <- CreateEcologist(50,70,50,20,10)
 expertdata <- CreateEcologist(50,75,10,5,200)
 
-samplingresult <- Sampling(Papilio,10,expertdata,volunteerdata,2,1,0,0)
+samplingresult <- Sampling(Papilio,10,expertdata,volunteerdata,4,1,0,0,outputall=F)
 samplingresult
-rm(samplingresult)
 
 debug(Sampling)
 undebug(Sampling)
 
-#Error by using one plot and one expert
+
