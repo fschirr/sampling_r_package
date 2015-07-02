@@ -76,19 +76,14 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
     data$expert.volunteer[data[, 1] %in% expert.plots & data[, 6] 
                           %in% year & data[, 7] %in% month & data[, 8] %in% day] <- "expert" 
     
-    
     data$costs[data[, 1] %in% expert.plots & data[, 6] %in% year 
                 & data[, 7] %in% month & data[, 8] %in% day] <- expert[5]
-    
-    if (num.of.plots != num.experts) {
-#       volunteer.plots <- choosenplots[!(choosenplots %in% expert.plots)]
     
       data$expert.volunteer[data[, 1] %in% volunteer.plots & data[, 6] 
                 %in% year & data[, 7] %in% month & data[, 8] %in% day] <- "volunteer"
     
       data$costs[data[, 1] %in% volunteer.plots & data[, 6] %in% year 
                 & data[, 7] %in% month & data[, 8] %in% day] <- volunteer[5]
-    }
   
    if (num.experts > 0) {
     data <- SamplingEcologist (data, expert.plots, expert[1],
