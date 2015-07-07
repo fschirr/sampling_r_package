@@ -16,7 +16,7 @@
 #'   
 
 PrepareDataset <- function(data, plot, num.of.individuals, 
-                           species, x.coord, y.coord, visit.year,visit.month, visit.day) {
+                           species, x.coord, y.coord, visit.year, visit.month, visit.day) {
   
   column.plot <- ifelse (plot > 0, data[plot], rep(0, length(data[, 1])))
   column.num.of.individuals <- ifelse (num.of.individuals > 0, data[num.of.individuals],
@@ -43,10 +43,9 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
                      num.experts, frequency.year, frequency.month, frequency.day,
                      outputall){
   
-  if (num.of.plots < num.experts) { 
-    stop("num.of.plots need to be equal or more than num.experts")
-  }
-  
+  CheckingInputs (data, num.of.plots, expert, volunteer, 
+                  num.experts, frequency.year, frequency.month, frequency.day)  
+
   data$expert.volunteer <- 0
   data$costs <- 0
   
@@ -100,6 +99,22 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
   } else {
     data <- data[data$expert.volunteer != 0, ]
     return (data)
+  }
+}
+
+CheckingInputs <- function (data, num.of.plots, expert, volunteer, 
+                            num.experts, frequency.year, frequency.month, frequency.day) {
+  if (num.of.plots < num.experts) { 
+    stop ("num.of.plots need to be equal or more than num.experts")
+  }
+  if (frequency.year < 1) {
+    stop ("frequency.year has to be 1 or higher")
+  }
+  if (frequency.month == 0 & data[1, 7] > 0) {
+    stop ("frequency.month has to be 1 or higher")
+  }
+  if (frequency.day == 0 & data[1, 8] > 0) {
+    stop ("frequency.day has to be 1 or higher")
   }
 }
 
