@@ -174,33 +174,43 @@ SamplingEcologist <- function(data, plots, sampling.area,
   return(data)
 }
  
-#' SamplingFunctions
-#'
-#' For every row a new number is chosen by a binomial distribution and an ecologist characteristic.
-#' the new column is saved 
+# SamplingArea
+#
+# Replaces each number in the column by a new on which 
+# is a simulated random variable from a binomal distribution.
+#
+#   
+#
+# Args:
+#  data: The column of the dataset which should be used for this function. 
+#        The data content is the column with the number of individuals (num.of.individuals)
+#  sampling.area: Sampled area of the plot in percent
+#
+# Returns:
+#  New numbers
 
-SamplingArea <- function(data, sampling.area) {
-  for(i in 1:length(data)){
+SamplingArea <- function (data, sampling.area) {
+  for(i in 1:length(data)) {
     data[i] <- rbinom(1, data[i], (sampling.area / 100))
   }
   return(data)
 }
 
-SamplingIdentificationError <- function(data, identification.error) {
-  for(i in 1:length(data)){
+SamplingIdentificationError <- function (data, identification.error) {
+  for(i in 1:length(data)) {
     data[i] <- rbinom(1, data[i], (1 - (identification.error / 100)))
   }
   return(data)
 }
 
-SamplingDetectionProbability <- function(data, detection.probability) {
-  for(i in 1:length(data)){
+SamplingDetectionProbability <- function (data, detection.probability) {
+  for(i in 1:length(data)) {
     data[i] <- rbinom(1, data[i], (detection.probability / 100))
   }
   return(data)
 }
 
-SamplingMissedVisits <- function(data, missed.visits) {
+SamplingMissedVisits <- function (data, missed.visits) {
   for(i in 1:length(data)) {
     data[i] <- ifelse (sample(0:100, 1) < missed.visits, NA, data[i]) #maybe with if and rbinom
   }
