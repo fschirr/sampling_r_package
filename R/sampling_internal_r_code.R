@@ -12,7 +12,7 @@ ChoosePlots <- function (data, num.of.plots) {
   
   choosenplots <- sort (sample (unique (data[, 1]), num.of.plots, replace = F))
   
-  return (choosenplots)
+  return (choosenplots) #chosenplots
 }
 
 #' Selects the plots which are monitored by experts.
@@ -88,7 +88,7 @@ SamplingEcologist <- function(data, plots, sampling.area, detection.probability,
 # Returns:
 #  New numbers
 
-SamplingArea <- function (data, sampling.area) {
+SamplingArea <- function (data, sampling.area) { #other name clarification: proportion of individuals sampled may vary
   for(i in 1:length(data)) {
     data[i] <- rbinom(1, data[i], (sampling.area / 100))
   }
@@ -111,7 +111,7 @@ SamplingDetectionProbability <- function (data, detection.probability) {
 
 SamplingMissedVisits <- function (data, missed.visits) {
   for(i in 1:length(data)) {
-    data[i] <- ifelse (sample(0:100, 1) < missed.visits, NA, data[i]) #maybe with if and rbinom
+    data[i] <- ifelse (sample(0:100, 1) < missed.visits, NA, data[i]) #uniform dist
   }
   return(data)
 }

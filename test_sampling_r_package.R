@@ -49,7 +49,7 @@ for (j in 1:16){
   }
 }
 
-num.individuals <- num.individuals[-1]
+num.individuals <- num.individuals[-1] 
 
 Papilio.machaon <- data.frame(plots, x.coord, y.coord, years, num.individuals, 
                               species, months, days)
