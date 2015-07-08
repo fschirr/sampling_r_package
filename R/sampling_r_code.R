@@ -1,6 +1,6 @@
-Sampling <- function(data, num.of.plots, expert, volunteer, 
-                     num.experts, frequency.year, frequency.month, frequency.day,
-                     outputall){
+Sampling <- function(data, num.of.plots, expert, volunteer, num.experts, 
+                     frequency.year, frequency.month, frequency.day,
+                     outputall) {
   
   CheckingInputs (data, num.of.plots, expert, volunteer, 
                   num.experts, frequency.year, frequency.month, frequency.day)  
@@ -22,9 +22,11 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
     month <- 0
   }
 
-  # (length(month)%/%frequency.month / 2) starting in the middle or at the beginning??
+  # (length(month)%/%frequency.month / 2) starting in the middle or 
+  # at the beginning??
   
-  # Need to be tested for a different amount of days per month or different dates
+  # Need to be tested for a different amount of days per month or different 
+  # dates
   
   if (frequency.day > 0) {
     day <- unique (data[, 8])  # not sure - maybe using the total amount of days of a month
@@ -34,13 +36,15 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
   } 
       
     data$expert.volunteer[data[, 1] %in% expert.plots & data[, 6] 
-                          %in% year & data[, 7] %in% month & data[, 8] %in% day] <- "expert" 
+                          %in% year & data[, 7] %in% month & data[, 8] 
+                          %in% day] <- "expert" 
     
     data$costs[data[, 1] %in% expert.plots & data[, 6] %in% year 
                 & data[, 7] %in% month & data[, 8] %in% day] <- expert[5]
     
       data$expert.volunteer[data[, 1] %in% volunteer.plots & data[, 6] 
-                %in% year & data[, 7] %in% month & data[, 8] %in% day] <- "volunteer"
+                %in% year & data[, 7] %in% month & data[, 8] 
+                %in% day] <- "volunteer"
     
       data$costs[data[, 1] %in% volunteer.plots & data[, 6] %in% year 
                 & data[, 7] %in% month & data[, 8] %in% day] <- volunteer[5]
@@ -63,8 +67,15 @@ Sampling <- function(data, num.of.plots, expert, volunteer,
   }
 }
 
-CheckingInputs <- function (data, num.of.plots, expert, volunteer, 
-                            num.experts, frequency.year, frequency.month, frequency.day) {
+#' Error messages for the function \code{Sampling}
+#' 
+#' \code{CheckingInputs} tests the inputs of the function \code{Sampling} and 
+#' returns an error message if necessary.
+#' 
+#' 
+
+CheckingInputs <- function (data, num.of.plots, expert, volunteer, num.experts, 
+                            frequency.year, frequency.month, frequency.day) {
   
   if (num.of.plots < num.experts) { 
     stop ("num.of.plots need to be equal or more than num.experts")
@@ -78,4 +89,5 @@ CheckingInputs <- function (data, num.of.plots, expert, volunteer,
   if (frequency.day == 0 & data[1, 8] > 0) {
     stop ("frequency.day has to be 1 or higher")
   }
+  # checking expert/volunteer input with is.nummeric == T. For all or for each number 
 }

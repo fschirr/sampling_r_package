@@ -51,14 +51,16 @@ for (j in 1:16){
 
 num.individuals <- num.individuals[-1]
 
-Papilio.machaon <- data.frame(plots,x.coord,y.coord,years,num.individuals,species,months,days)
+Papilio.machaon <- data.frame(plots, x.coord, y.coord, years, num.individuals, 
+                              species, months, days)
 
 Papilio <- PrepareDataset(Papilio.machaon,1,5,6,2,3,4,7,8)
 
 volunteerdata <- CreateEcologist(50,70,50,20,10)
 expertdata <- CreateEcologist(50,75,10,5,200)
 
-samplingresult <- Sampling(Papilio,10,expertdata,volunteerdata,12,1,1,1,outputall=F)
+samplingresult <- Sampling(Papilio, 10, expertdata, volunteerdata, 2, 1, 1, 1, 
+                           outputall=F)
 samplingresult
 
 debug(Sampling)
