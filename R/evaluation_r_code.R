@@ -7,7 +7,7 @@ Evaluation <- function(data, num.of.plots, expert, volunteer, num.experts,
         
       Sampling (data, j, expert, volunteer, num.experts, 
             frequency.year, frequency.month, frequency.day,
-            outputall)
+            outputall, k)
       
     }
   }
