@@ -24,3 +24,6 @@
 #' @name SamplingVirtualEcologist
 NULL
 #> NULL
+
+library(ggplot2)
+library(Rmisc)
