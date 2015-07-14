@@ -10,28 +10,28 @@
 
 ChoosePlots <- function (data, num.of.plots) {
   
-  choosenplots <- sort (sample (unique (data[, 1]), num.of.plots, replace = F))
+  chosenplots <- sort (sample (unique (data[, 1]), num.of.plots, replace = F))
   
-  return (choosenplots) #chosenplots
+  return (chosenplots) #chosenplots
 }
 
 #' Selects the plots which are monitored by experts.
 #' 
-#' \code{ExpertPlots} selects the plots of the \code{choosenplots} which are 
+#' \code{ExpertPlots} selects the plots of the \code{chosenplots} which are 
 #' monitored by experts.
 #' 
-#' @param choosenplots Output of the function \code{ChoosePlots}
+#' @param chosenplots output of the function \code{ChoosePlots}
 #' @param num.of.plots A number.
 #' @param num.experts A number.
 #' 
 #' @return A vector with the name/number of the plots.
 
-ExpertPlots <- function (choosenplots, num.of.plots, num.experts) {
+ExpertPlots <- function (chosenplots, num.of.plots, num.experts) {
   
   if (num.of.plots == 1 & num.experts == 1) {
-    expert.plots <- choosenplots
+    expert.plots <- chosenplots
   } else {
-    expert.plots <- sample (choosenplots, num.experts)
+    expert.plots <- sample (chosenplots, num.experts)
   }
   
   return (expert.plots)
@@ -39,17 +39,17 @@ ExpertPlots <- function (choosenplots, num.of.plots, num.experts) {
 
 #' Selects the plots which are monitored by volunteers.
 #' 
-#' \code{VolunteerPlots} selects the plots of the \code{choosenplots} which are 
+#' \code{VolunteerPlots} selects the plots of the \code{chosenplots} which are 
 #' not monitored by experts.
 #' 
-#' @param choosenplots Output of the function \code{ChoosePlots}
+#' @param chosenplots Output of the function \code{ChoosePlots}
 #' @param num.experts A number.
 #' 
 #' @return A vector with the name/number of the plots.
 
-VolunteerPlots <- function (choosenplots, expert.plots) {
+VolunteerPlots <- function (chosenplots, expert.plots) {
   
-  volunteer.plots <- choosenplots[!(choosenplots %in% expert.plots)]
+  volunteer.plots <- chosenplots[!(chosenplots %in% expert.plots)]
   
   return (volunteer.plots)
 }
@@ -94,6 +94,14 @@ SamplingArea <- function (data, sampling.area) { #other name clarification: prop
   }
   return(data)
 }
+
+#' Generates a new number for
+#' 
+#' \code{SamplingIdentificationError} uses the binomial distribution to replace
+#' the input by a new number. 
+#'
+#' @param data
+#' @param identification.error Number in percent. 
 
 SamplingIdentificationError <- function (data, identification.error) {
   for(i in 1:length(data)) {

@@ -4,10 +4,10 @@
 \alias{VolunteerPlots}
 \title{Selects the plots which are monitored by volunteers.}
 \usage{
-VolunteerPlots(choosenplots, expert.plots)
+VolunteerPlots(chosenplots, expert.plots)
 }
 \arguments{
-\item{choosenplots}{Output of the function \code{ChoosePlots}}
+\item{chosenplots}{Output of the function \code{ChoosePlots}}
 
 \item{num.experts}{A number.}
 }
@@ -15,7 +15,7 @@ VolunteerPlots(choosenplots, expert.plots)
 A vector with the name/number of the plots.
 }
 \description{
-\code{VolunteerPlots} selects the plots of the \code{choosenplots} which are
+\code{VolunteerPlots} selects the plots of the \code{chosenplots} which are
 not monitored by experts.
 }
 

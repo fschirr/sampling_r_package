@@ -64,7 +64,8 @@ reg1 <- lm(Papilio$num.of.individuals ~ Papilio$year)
 summary(reg1)
 coef(reg1)
 abline(reg1)
-reg2 <- lm(samplingresult$num.of.individuals ~ samplingresult$year)
+reg2 <- lm(evaluationresult$num.of.individuals[evaluationresult$N == "2"] ~ 
+             evaluationresult$year[evaluationresult$N == "2"])
 summary(reg2)
 coef(reg2)
 tap1 <- tapply(samplingresult[,2],samplingresult[,6],mean)
@@ -73,10 +74,12 @@ ggplot(summaryresult, aes(x=year, y=num.of.individuals)) +
   geom_errorbar(aes(ymin=num.of.individuals-sd, ymax=num.of.individuals+sd), width=.2) +
   geom_line() +
   geom_point() +
+  geom_smooth(method=lm)+
   geom_abline(intercept = 4094.269194, slope =-1.998118, colour ="red") +
   geom_abline(intercept = 3508.683571, slope =-1.708214, colour ="green")
  
-
+ 
+regall <- rbind(coef(reg1),coef(reg2))
 Mittelwert <- tapply(Papilio[,2],Papilio[,6],mean)
 
 Standardfehler <- tapply(Papilio[,2],Papilio[,6],sd)
@@ -92,9 +95,15 @@ expertdata <- CreateEcologist(100,100,0,0,200)
 
 samplingresult <- Sampling(Papilio, 10, expertdata, volunteerdata, 10, 1, 0, 0, 
                             outputall=F)
+evaluationresult <- Evaluation(Papilio, 10, expertdata, volunteerdata, 0, 1, 0, 0, 
+                               outputall=F)
+evaluationresult
 samplingresult
 
 summaryresult <- summarySE(samplingresult, measurevar = "num.of.individuals", groupvars = "year")
+
+debug(Evaluation)
+undebug(Evaluation)
 
 debug(Sampling)
 undebug(Sampling)

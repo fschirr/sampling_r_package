@@ -4,10 +4,10 @@
 \alias{ExpertPlots}
 \title{Selects the plots which are monitored by experts.}
 \usage{
-ExpertPlots(choosenplots, num.of.plots, num.experts)
+ExpertPlots(chosenplots, num.of.plots, num.experts)
 }
 \arguments{
-\item{choosenplots}{Output of the function \code{ChoosePlots}}
+\item{chosenplots}{output of the function \code{ChoosePlots}}
 
 \item{num.of.plots}{A number.}
 
@@ -17,7 +17,7 @@ ExpertPlots(choosenplots, num.of.plots, num.experts)
 A vector with the name/number of the plots.
 }
 \description{
-\code{ExpertPlots} selects the plots of the \code{choosenplots} which are
+\code{ExpertPlots} selects the plots of the \code{chosenplots} which are
 monitored by experts.
 }
 
