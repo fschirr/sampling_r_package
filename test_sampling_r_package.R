@@ -1,3 +1,11 @@
+
+plots <- rep(1:100)
+num.individuals <- sample(0:100,100,replace=T)
+x.coord <- rep(1:10,10)
+y.coord <- rep(1:10,each = 10)
+years <- rep(1, each=100)
+species <- rep("Papilio machaon",100)
+#year
 plots <- rep(1:100,30)
 #num.individuals <- sample(0:100,160,replace=T)
 x.coord <- rep(1:10,300)
@@ -95,12 +103,12 @@ expertdata <- CreateEcologist(100,100,0,0,200)
 
 samplingresult <- Sampling(Papilio, 10, expertdata, volunteerdata, 10, 1, 0, 0, 
                             outputall=F)
-evaluationresult <- Evaluation(Papilio, 10, expertdata, volunteerdata, 0, 1, 0, 0, 
-                               outputall=F)
+evaluationresult <- Evaluation(Papilio, 100, expertdata, volunteerdata, 0, 1, 0, 0, 
+                               outputall=F, 20)
 evaluationresult
 samplingresult
 
-summaryresult <- summarySE(samplingresult, measurevar = "num.of.individuals", groupvars = "year")
+summaryresult <- summarySE(evaluationresult, measurevar = "num.of.individuals", groupvars = "num.plots")
 
 debug(Evaluation)
 undebug(Evaluation)
