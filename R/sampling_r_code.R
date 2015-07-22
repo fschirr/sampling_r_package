@@ -1,6 +1,6 @@
 Sampling <- function(data, num.of.plots, expert, volunteer, num.experts, 
                      frequency.year, frequency.month, frequency.day,
-                     outputall, repetition) {
+                     outputall) {
   
   CheckingInputs (data, num.of.plots, expert, volunteer, 
                   num.experts, frequency.year, frequency.month, frequency.day)  
@@ -37,19 +37,23 @@ Sampling <- function(data, num.of.plots, expert, volunteer, num.experts,
     day <- 0
   } 
       
-    currentdata$expert.volunteer[currentdata[, 1] %in% expert.plots & currentdata[, 6] 
-                          %in% year & currentdata[, 7] %in% month & currentdata[, 8] 
-                          %in% day] <- "expert" 
+    currentdata$expert.volunteer[currentdata[, 1] %in% expert.plots &
+                                 currentdata[, 6] %in% year & currentdata[, 7] 
+                                 %in% month & currentdata[, 8] 
+                                 %in% day] <- "expert" 
     
-    currentdata$costs[currentdata[, 1] %in% expert.plots & currentdata[, 6] %in% year 
-                & currentdata[, 7] %in% month & currentdata[, 8] %in% day] <- expert[5]
+    currentdata$costs[currentdata[, 1] %in% expert.plots & currentdata[, 6] 
+                      %in% year & currentdata[, 7] %in% month & currentdata[, 8] 
+                      %in% day] <- expert[5]
     
-      currentdata$expert.volunteer[currentdata[, 1] %in% volunteer.plots & currentdata[, 6] 
-                %in% year & currentdata[, 7] %in% month & currentdata[, 8] 
-                %in% day] <- "volunteer"
+      currentdata$expert.volunteer[currentdata[, 1] %in% volunteer.plots & 
+                                     currentdata[, 6] %in% year & 
+                                     currentdata[, 7] %in% month & 
+                                     currentdata[, 8] %in% day] <- "volunteer"
     
-      currentdata$costs[currentdata[, 1] %in% volunteer.plots & currentdata[, 6] %in% year 
-                & currentdata[, 7] %in% month & currentdata[, 8] %in% day] <- volunteer[5]
+      currentdata$costs[currentdata[, 1] %in% volunteer.plots & currentdata[, 6] 
+                        %in% year & currentdata[, 7] %in% month & 
+                          currentdata[, 8] %in% day] <- volunteer[5]
   
    if (num.experts > 0) {
     
@@ -59,8 +63,9 @@ Sampling <- function(data, num.of.plots, expert, volunteer, num.experts,
   
    if (num.experts != num.of.plots) {
     
-     currentdata <- SamplingEcologist (currentdata, volunteer.plots, volunteer[1],
-                              volunteer[2], volunteer[3], volunteer[4])
+     currentdata <- SamplingEcologist (currentdata, volunteer.plots, 
+                                       volunteer[1], volunteer[2], volunteer[3], 
+                                       volunteer[4])
    }
   
   if (outputall) {
