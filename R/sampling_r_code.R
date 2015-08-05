@@ -1,4 +1,4 @@
-Sampling <- function(data, num.of.plots, expert, volunteer, num.experts, 
+ Sampling <- function(data, num.of.plots, expert, volunteer, num.experts, 
                      frequency.year, frequency.month, frequency.day,
                      outputall) {
   

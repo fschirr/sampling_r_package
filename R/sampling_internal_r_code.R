@@ -12,7 +12,7 @@ ChoosePlots <- function (data, num.of.plots) {
   
   chosenplots <- sort (sample (unique (data[, 1]), num.of.plots, replace = F))
   
-  return (chosenplots) #chosenplots
+  return (chosenplots)
 }
 
 #' Selects the plots which are monitored by experts.
@@ -56,23 +56,11 @@ VolunteerPlots <- function (chosenplots, expert.plots) {
 
 ###
 
-# SamplingEcologist <- function(data, plots, sampling.area, detection.probability, 
-#                               identification.error, probability.missed.visits) {
-#   for(i in 1:length(data)) {
-#     data[i] <- rbinom(1, data[i], (sampling.area / 100))
-#     data[i] <- rbinom(1, data[i], (detection.probability / 100))
-#     data[i] <- rbinom(1, data[i], (1 - (identification.error / 100)))
-#     data[i] <- ifelse (sample(0:100, 1) < probability.missed.visits, NA, data[i])
-#   }
+# SamplingEcologist
 # 
-#   return(data)
-# }
-
-# # SamplingEcologist
-# # 
-# #This function combines the different sampling functions of the Ecologist 
-# # sampling behaviour and runs them for chossen plots. It returns a dataset. 
-# 
+# This function combines the different sampling functions of the Ecologist 
+# sampling behaviour and runs them for chossen plots. It returns a dataset. 
+ 
 SamplingEcologist <- function(data, plots, sampling.area, detection.probability, 
                               identification.error, probability.missed.visits) {
 
@@ -87,7 +75,7 @@ SamplingEcologist <- function(data, plots, sampling.area, detection.probability,
 #                                           %in% plots, 2], identification.error)
 #   data[data[, 1] %in% plots, 2] <- SamplingMissedVisits (data[data[, 1] 
 #                                           %in% plots, 2], 
-#                                           probability.missed.visits)
+#                                            probability.missed.visits)  
   return(data)
 }
 
