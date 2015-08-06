@@ -81,7 +81,7 @@ SamplingEcologist <- function(data, plots, sampling.area, detection.probability,
 
 SampledArea <- function (data, sampling.area, detection.probability, 
                          identification.error, probability.missed.visits) { 
-  
+  # SD = sqrt(num.of.plots)*SE
   for(i in 1:length(data)) {
     data[i] <- rbinom(1, data[i], (sampling.area / 100))
     data[i] <- rbinom(1, data[i], (detection.probability / 100))

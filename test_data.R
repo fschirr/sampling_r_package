@@ -25,7 +25,7 @@ species <- rep("Papilio machaon", 3000)
 num.individuals <- NULL
 
 for (j in 1:30) {
-  individuals <- rnorm(100, (5000 - j * 125), 400)
+  individuals <- rnorm(100, (5000 - j * 125), 2000)
   num.individuals <- c(num.individuals, individuals)
 }
 
